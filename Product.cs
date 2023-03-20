@@ -14,33 +14,30 @@ public class Prodotto
 
     public Prodotto(string nome, string descrizione, double prezzo, int iva)
     {
-        Codice = new Random().Next(1, 99999999);
-        NomeProdotto = nome;
-        DescrizioneProdotto = descrizione;
-        PrezzoProdotto = prezzo;
-        Iva = iva;
+        this.Codice = new Random().Next(1, 99999999);
+        this.NomeProdotto = nome;
+        this.DescrizioneProdotto = descrizione;
+        this.PrezzoProdotto = prezzo;
+        this.Iva = iva;
     }
-    public void Print()
+    public string CodiceConPad()
     {
-        double prezzoConIva(double PrezzoProdotto, int Iva)
+
+        var stringCode = Convert.ToString(Codice);
+        var zero = "0";
+        var iterations = 8 - stringCode.Length;
+
+        for (int i = 0; i < iterations; i++)
         {
-            double IvaPrezzo = PrezzoProdotto * Iva;
-
-            double prezzoConIva = PrezzoProdotto + IvaPrezzo;
-
-
-            return prezzoConIva;
+            stringCode = zero + stringCode;
         }
 
-        Console.WriteLine(NomeProdotto);
-        Console.Write("Descrizione: ");
-        Console.WriteLine(DescrizioneProdotto);
-        Console.Write("Prezzo compreso di iva: ");
-        Console.WriteLine($"{prezzoConIva}");
-        Console.Write("IVA: ");
-        Console.WriteLine(Iva);
+        return stringCode;
 
     }
-   
+    public double? PrezzoConIva()
+    {
+        return PrezzoProdotto += (PrezzoProdotto * Iva) / 100;
+    }
 
 }
